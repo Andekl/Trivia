@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using Trivia.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace Trivia
 {
@@ -23,6 +26,11 @@ namespace Trivia
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<UserContext>().AddDefaultTokenProviders();
+
+            services.AddDbContext<UserContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("UserContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +51,8 @@ namespace Trivia
             }
 
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
