@@ -19,11 +19,5 @@ namespace React.Trivia.Data
 		public DbSet<Question> Question { get; set; }
 		public DbSet<Answer> Answer { get; set; }
 
-		//protected override void OnModelCreating(ModelBuilder modelBuilder)
-		//{
-		//	//modelBuilder.Entity<Question>().ToTable("Question");
-		//	//modelBuilder.Entity<Answer>().ToTable("Answer");
-		//	//modelBuilder.Entity<Highscore>().ToTable("Highscore");
-		//}
 	}
 }

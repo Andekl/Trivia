@@ -11,7 +11,7 @@ export class Highscore extends React.Component<RouteComponentProps<{}>, IHighsco
 	constructor() {
 		super();
 		this.state = { score: 0, userId: 0 }
-	};
+	}
 	public render() {
 		return <div>
 			<p>See highscore here!</p>
