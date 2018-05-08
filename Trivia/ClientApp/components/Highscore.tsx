@@ -31,7 +31,7 @@ export class Highscore extends React.Component<RouteComponentProps<{}>, IHighsco
 					score: json.score,
 					userId: json.userId
 				});
-				console.log('GetHighscore jason ', json)
+				console.log('GetHighscore json ', json)
 			})
 	}
 }
