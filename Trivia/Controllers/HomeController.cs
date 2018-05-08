@@ -10,8 +10,8 @@ namespace Trivia.Controllers
 {
     public class HomeController : Controller
     {
-        //[Authorize]
-        public IActionResult Index()
+        [Authorize]
+        public IActionResult Index() 
         {
             return View();
         }
