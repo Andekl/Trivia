@@ -10,11 +10,13 @@ interface IHighscoreState {
 export class Highscore extends React.Component<RouteComponentProps<{}>, IHighscoreState> {
 	constructor() {
 		super();
-		this.state = { score: 0, userId: 0 }
+		this.state = { score: 0, userId: 1 }
 	}
 	public render() {
 		return <div>
 			<p>See highscore here!</p>
+			{this.state.score}
+			{this.state.userId}
 		</div>;
 	}
 
