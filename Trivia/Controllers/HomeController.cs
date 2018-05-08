@@ -19,7 +19,7 @@ namespace Trivia.Controllers
         public IActionResult Error()
         {
             ViewData["RequestId"] = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
-            return View();
+            return View(); 
         }
     }
 }
