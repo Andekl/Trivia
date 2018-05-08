@@ -26,13 +26,13 @@ namespace Trivia
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<UserContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("UserContext")));
-            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<UserContext>().AddDefaultTokenProviders();
-  
-           services.AddDbContext<TriviaContext>(options =>
-					  options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-          
+            services.AddDbContext<TriviaContext>(options => options.UseSqlServer(Configuration.GetConnectionString("IdConnection")));
+
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<TriviaContext>()
+                .AddDefaultTokenProviders();
+
+
             services.AddMvc();
         }
 

@@ -5,15 +5,14 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
-using Microsoft.EntityFrameworkCore.ValueGeneration;
+using React.Trivia.Data;
 using System;
-using Trivia.Models;
 
 namespace Trivia.Migrations
 {
-    [DbContext(typeof(UserContext))]
-    [Migration("20180507193754_initial")]
-    partial class initial
+    [DbContext(typeof(TriviaContext))]
+    [Migration("20180508093139_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -75,9 +74,6 @@ namespace Trivia.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired();
-
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
@@ -117,8 +113,6 @@ namespace Trivia.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -186,14 +180,44 @@ namespace Trivia.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Trivia.Models.User", b =>
+            modelBuilder.Entity("React.Trivia.Models.Answer", b =>
                 {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
+                    b.Property<bool>("IsCorrect");
 
-                    b.ToTable("User");
+                    b.Property<string>("Option");
 
-                    b.HasDiscriminator().HasValue("User");
+                    b.HasKey("Id");
+
+                    b.ToTable("Answer");
+                });
+
+            modelBuilder.Entity("React.Trivia.Models.Highscore", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Score");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Highscore");
+                });
+
+            modelBuilder.Entity("React.Trivia.Models.Question", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("QuestionName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Question");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

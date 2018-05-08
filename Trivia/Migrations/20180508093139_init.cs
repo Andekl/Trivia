@@ -5,10 +5,24 @@ using System.Collections.Generic;
 
 namespace Trivia.Migrations
 {
-    public partial class initial : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Answer",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    IsCorrect = table.Column<bool>(nullable: false),
+                    Option = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Answer", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -30,7 +44,6 @@ namespace Trivia.Migrations
                     Id = table.Column<string>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
-                    Discriminator = table.Column<string>(nullable: false),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(nullable: false),
                     LockoutEnabled = table.Column<bool>(nullable: false),
@@ -47,6 +60,33 @@ namespace Trivia.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Highscore",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Score = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Highscore", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Question",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    QuestionName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Question", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -198,6 +238,9 @@ namespace Trivia.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Answer");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
@@ -211,6 +254,12 @@ namespace Trivia.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Highscore");
+
+            migrationBuilder.DropTable(
+                name: "Question");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
