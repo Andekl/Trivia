@@ -121,10 +121,11 @@ namespace Trivia.Controllers
         [Route("api/AddQuestion")]
         public string AddQuestion(string question)
         {
-            Question q = _context.Question.First();
+            Question q = new Question();
+            _context.Question.AddAsync(q);
             q.QuestionName = question;
             _context.SaveChanges();
-            return "Received payment";
+            return "Added new question";
         }
 
         private bool QuestionExists(int id)
