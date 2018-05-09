@@ -11,6 +11,13 @@ export class Highscore extends React.Component<RouteComponentProps<{}>, IHighsco
 	constructor() {
 		super();
 		this.state = { score: 0, userId: 1 }
+
+		fetch('/api/Highscores')
+			.then(response => { console.log('Highscores returned ', response); return response.json(); })
+			.then(data => {
+				this.setState({ score: data.score, userId: data.userId });
+				console.log('Highscores json ', data)
+			})
 	}
 	public render() {
 		return <div>
@@ -18,22 +25,5 @@ export class Highscore extends React.Component<RouteComponentProps<{}>, IHighsco
 			{this.state.score}
 			{this.state.userId}
 		</div>;
-	}
-
-	componentDidMount() {
-		//fråga API:et efter aktuell data
-		fetch('/api/GetHighscore')
-			.then(data => {
-				console.log('GetHighscore returned ', data);
-				return data.json();
-			})
-			.then(json => {
-				this.setState({ //state uppdateras,sen säger den till komponenten att den har uppdateras 
-					//och att den måste renderas igen
-					score: json.score,
-					userId: json.userId
-				});
-				console.log('GetHighscore json ', json)
-			})
 	}
 }
