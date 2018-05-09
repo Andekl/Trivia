@@ -6,7 +6,6 @@ import { NavMenu } from './NavMenu';
 interface IAddQuestionProps { }
 interface IAddQuestionState {
 	questionName: string;
-
 }
 
 export class AddQuestion extends React.Component<RouteComponentProps<{}>, {}> {
@@ -14,10 +13,10 @@ export class AddQuestion extends React.Component<RouteComponentProps<{}>, {}> {
 		super();
 		this.state = { }
 
-		fetch('api/AddQuestions')
+		fetch('api/AddQuestions') // post question method??
 			.then(response => { console.log('AddQuestions returned ', response); return response.json(); })
 			.then(data => {
-				this.setState({ score: data.score, userId: data.userId });
+				this.setState({ questionName: data });
 				console.log('AddQuestions json ', data)
 			})
 	}
