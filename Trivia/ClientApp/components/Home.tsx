@@ -11,7 +11,7 @@ export class Home extends React.Component<RouteComponentProps<{}>, {}> {
 		super();
 		this.state = {}
 
-		fetch('api/AddQuestions') //change api method to get 1 question??
+		fetch('api/Questions') //change api method to get 1 question??
 			.then(response => { console.log('AddQuestions returned ', response); return response.json(); })
 			.then(data => {
 				this.setState({ questionName: data });
