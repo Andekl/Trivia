@@ -9,5 +9,6 @@ namespace React.Trivia.Models
     {
 		public string QuestionName { get; set; }
 		public string Option { get; set; }
+		public bool IsCorrect { get; set; }
     }
 }
