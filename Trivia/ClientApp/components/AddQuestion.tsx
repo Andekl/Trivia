@@ -28,6 +28,11 @@ export class AddQuestion extends React.Component<RouteComponentProps<{}>, {}> {
 			<input type="text" placeholder="Add option" /> <br />
 			<input type="text" placeholder="Add option" /> <br />
 			<input type="text" placeholder="Add option" /> <br />
+			<button onClick={this.handleClick}> Submit question! </button>
 		</div>;
+	}
+	public handleClick() {
+		//function to handle click button
+		//needs code to do it :)
 	}
 }
