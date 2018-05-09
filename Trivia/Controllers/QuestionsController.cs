@@ -118,6 +118,15 @@ namespace Trivia.Controllers
             return Ok(question);
         }
 
+        [Route("api/AddQuestion")]
+        public string AddQuestion(string question)
+        {
+            Question q = _context.Question.First();
+            q.QuestionName = question;
+            _context.SaveChanges();
+            return "Received payment";
+        }
+
         private bool QuestionExists(int id)
         {
             return _context.Question.Any(e => e.Id == id);

@@ -52,8 +52,8 @@ export class AddQuestion extends React.Component<RouteComponentProps<IAddQuestio
     handleChangeNewQuestion(event: any) {
         this.setState({ questionName: event.target.value });
     }
-    public handleClick() {
-        //function to handle click button
-        //needs code to do it :)
+    handleClick(event: any) {
+        fetch('api/AddQuestion?question=' + this.state.questionName)
+        .then//updatera databas, lägg till ny rad.
     }
 }
