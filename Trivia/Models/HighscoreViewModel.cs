@@ -9,5 +9,6 @@ namespace React.Trivia.Models
     {
 		public int Score { get; set; }
 		public int UserId { get; set; }
+		public List<Highscore> HighscoreList { get; set; }
 	}
 }

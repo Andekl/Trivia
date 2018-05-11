@@ -11,24 +11,24 @@ using React.Trivia.Models;
 namespace Trivia.Controllers
 {
     [Produces("application/json")]
-    [Route("api/AddQuestions")]
-    public class AddQuestionsController : Controller
+    [Route("api/Questions")]
+    public class QuestionsController : Controller
     {
         private readonly TriviaContext _context;
 
-        public AddQuestionsController(TriviaContext context)
+        public QuestionsController(TriviaContext context)
         {
             _context = context;
         }
 
-        // GET: api/AddQuestions
+        // GET: api/Questions
         [HttpGet]
         public IEnumerable<Question> GetQuestion()
         {
             return _context.Question;
         }
 
-        // GET: api/AddQuestions/5
+        // GET: api/Questions/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetQuestion([FromRoute] int id)
         {
@@ -47,7 +47,7 @@ namespace Trivia.Controllers
             return Ok(question);
         }
 
-        // PUT: api/AddQuestions/5
+        // PUT: api/Questions/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutQuestion([FromRoute] int id, [FromBody] Question question)
         {
@@ -82,7 +82,7 @@ namespace Trivia.Controllers
             return NoContent();
         }
 
-        // POST: api/AddQuestions
+        // POST: api/Questions
         [HttpPost]
         public async Task<IActionResult> PostQuestion([FromBody] Question question)
         {
@@ -97,7 +97,7 @@ namespace Trivia.Controllers
             return CreatedAtAction("GetQuestion", new { id = question.Id }, question);
         }
 
-        // DELETE: api/AddQuestions/5
+        // DELETE: api/Questions/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteQuestion([FromRoute] int id)
         {
