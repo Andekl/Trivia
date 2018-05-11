@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using React.Trivia.Models;
+using Trivia.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-namespace React.Trivia.Data
+namespace Trivia.Data
 {
-	public class TriviaContext : IdentityDbContext
+	public class TriviaContext : IdentityDbContext<ApplicationUser>
 	{
 		public TriviaContext(DbContextOptions<TriviaContext> options)
 			: base(options)
@@ -17,5 +17,13 @@ namespace React.Trivia.Data
 
 		public DbSet<Highscore> Highscore { get; set; }
 		public DbSet<Question> Question { get; set; }
+
+		protected override void OnModelCreating(ModelBuilder builder)
+		{
+			base.OnModelCreating(builder);
+			// Customize the ASP.NET Identity model and override the defaults if needed.
+			// For example, you can rename the ASP.NET Identity table names and more.
+			// Add your customizations after calling base.OnModelCreating(builder);
+		}
 	}
 }

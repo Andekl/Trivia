@@ -1,6 +1,6 @@
 using System;
 
-namespace React.Trivia.Models
+namespace Trivia.Models
 {
     public class ErrorViewModel
     {

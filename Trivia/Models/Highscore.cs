@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Identity;
 
-namespace React.Trivia.Models
+namespace Trivia.Models
 {
 	public class Highscore
 	{
