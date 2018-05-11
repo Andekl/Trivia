@@ -19,7 +19,6 @@ namespace Trivia.Controllers
 	{
 		private readonly UserManager<ApplicationUser> _userManager;
 		private readonly SignInManager<ApplicationUser> _signInManager;
-		//private readonly IEmailSender _emailSender;
 		private readonly ILogger _logger;
 		private readonly TriviaContext _context;
 
@@ -27,7 +26,6 @@ namespace Trivia.Controllers
 			UserManager<ApplicationUser> userManager,
 			SignInManager<ApplicationUser> signInManager,
 			ILogger<AccountController> logger,
-			//IEmailSender emailSender,
 			TriviaContext context)
 		{
 			_userManager = userManager;
