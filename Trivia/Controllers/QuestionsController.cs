@@ -28,8 +28,15 @@ namespace Trivia.Controllers
             return _context.Question;
         }
 
-        // GET: api/Questions/5
-        [HttpGet("{id}")]
+		[HttpGet]
+		[Route("Submit")]
+		public int SubmitAnswer(string answer)
+		{
+			return 1;
+		}
+
+		// GET: api/Questions/5
+		[HttpGet("{id}")]
         public async Task<IActionResult> GetQuestion([FromRoute] int id)
         {
             if (!ModelState.IsValid)
