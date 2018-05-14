@@ -3,7 +3,7 @@ import { RouteComponentProps } from 'react-router';
 
 interface Highscores {
 	score: number;
-	userId: number;
+	id: number;
 }
 
 interface IHighscoreProps { }
@@ -19,14 +19,13 @@ export class Highscore extends React.Component<RouteComponentProps<{}>, IHighsco
 			.then(response => { console.log('Highscores returned ', response); return response.json(); })
 			.then(data => {
 				this.setState({ scores: data });
-				console.log('Highscores json ', data)
 			})
 	}
 	public render() {
 		const list = this.state.scores.map(scores => (
 			<tr>
 				<td> {scores.score} </td>
-				<td> {scores.userId} </td>
+				<td> {scores.id} </td>
 			</tr>
 		));
 		return <div>
@@ -36,7 +35,7 @@ export class Highscore extends React.Component<RouteComponentProps<{}>, IHighsco
 				<thead>
 					<tr>
 						<th>Score</th>
-						<th>User Id</th>
+						<th>Player</th>
 					</tr>
 				</thead>
 				<tbody> {list} </tbody>

@@ -10,7 +10,8 @@ namespace Trivia.Models
 		public int Id { get; set; }
 		public string QuestionName { get; set; }
 		public string CorrectOption { get; set; }
-		public string FalseOption1 { get; set; }
-		public string FalseOption2 { get; set; }
+		public string Option1 { get; set; }
+		public string Option2 { get; set; }
+		public string Option3 { get; set; }
 	}
 }

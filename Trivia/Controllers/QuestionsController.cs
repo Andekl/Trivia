@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,21 @@ namespace Trivia.Controllers
         {
             return _context.Question;
         }
+
+		[HttpGet]
+		[Route("SubmitScore")]
+		public int SubmitScore(int id)
+		{
+			Highscore scores = new Highscore
+			{
+				Score = id,
+			};
+
+			_context.Highscore.Add(scores);
+			var result = _context.SaveChanges();
+
+			return result;
+		}
 
 		[HttpGet]
 		[Route("Submit")]
