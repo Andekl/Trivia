@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -28,17 +29,13 @@ namespace Trivia.Controllers
             return _context.Question;
         }
 
-		public int SubmitScore(int score, string userId)
+		[HttpGet]
+		[Route("SubmitScore")]
+		public int SubmitScore(int id)
 		{
-			var user = _context.Users.Where(u => u.Id == userId).Single();
-			if (user == null)
-			{
-				throw new ApplicationException($"Unable to load user with ID '{userId}'.");
-			}
 			Highscore scores = new Highscore
 			{
-				Score = score,
-				User = ApplicationUser.user
+				Score = id,
 			};
 
 			_context.Highscore.Add(scores);

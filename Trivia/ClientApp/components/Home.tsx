@@ -6,8 +6,8 @@ import { ChangeEvent } from 'react';
 
 let counter: number;
 counter = 0;
-let points: number;
-points = 0;
+let score: number;
+score = 0;
 let id = document.getElementById('react-app')!.textContent;
 interface IQuestionsProps { }
 interface IQuestionsState {
@@ -104,7 +104,6 @@ export class Home extends React.Component<RouteComponentProps<{}>, IQuestionsSta
 			</div>;
 		}
 		else {
-			console.log('no more questions');
 			this.submitScore();
 			return <div>
 				<p> Your highscore is {this.state.pointsState} </p>
@@ -118,9 +117,9 @@ export class Home extends React.Component<RouteComponentProps<{}>, IQuestionsSta
 	}
 
 	restart() {
-		points = 0;
+		score = 0;
 		counter = 0;
-		this.setState({ counterState: counter, pointsState: points });
+		this.setState({ counterState: counter, pointsState: score });
 	}
 
 	nextQuestion() {
@@ -140,8 +139,8 @@ export class Home extends React.Component<RouteComponentProps<{}>, IQuestionsSta
 		console.log(counter);
 		console.log(this.state.selectedOption);
 		if (this.state.questions[counter].correctOption === this.state.selectedOption) {
-			points++;
-			this.setState({ pointsState: points })
+			score++;
+			this.setState({ pointsState: score })
 			console.log('correct');
 			this.setState({ result: 'Correct!' });
 			this.setState({ resultClassName: 'alert alert-success' });
@@ -156,7 +155,7 @@ export class Home extends React.Component<RouteComponentProps<{}>, IQuestionsSta
 	}
 
 	submitScore() {
-		fetch('api/Questions/SubmitScore?points=' + this.state.pointsState + '&id=' + id)
+		fetch('api/Questions/SubmitScore?id=' + this.state.pointsState)
 			.then(Response =>
 				console.log('fetch status: ', Response.status));
 	}
