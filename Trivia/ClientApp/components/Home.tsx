@@ -71,11 +71,6 @@ export class Home extends React.Component<RouteComponentProps<{}>, IQuestionsSta
 	public renderQuestionTable(questions: Question[], counter1: number) {
 		if (counter < questions.length) {
 			return <div>
-				<div className="progress">
-					<div id="progressbar" className="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
-						<span className="sr-only">70% Complete</span>
-					</div>
-				</div>
 				<ul className="list-group">
 					<div><h3>{questions[counter1].questionName}</h3></div>
 					<label className="list-group-item">
