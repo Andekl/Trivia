@@ -6,15 +6,16 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
-using Trivia.Data;
+using React.Trivia.Data;
 using System;
 
 namespace Trivia.Migrations
 {
     [DbContext(typeof(TriviaContext))]
-    partial class TriviaContextModelSnapshot : ModelSnapshot
+    [Migration("20180514140741_change2")]
+    partial class change2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -279,7 +280,7 @@ namespace Trivia.Migrations
             modelBuilder.Entity("React.Trivia.Models.Highscore", b =>
                 {
                     b.HasOne("React.Trivia.Models.ApplicationUser", "User")
-                        .WithMany("Highscores")
+                        .WithMany()
                         .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618

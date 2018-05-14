@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using React.Trivia.Data;
-using React.Trivia.Models;
+using Trivia.Data;
+using Trivia.Models;
 
 namespace Trivia.Controllers
 {
@@ -28,8 +29,30 @@ namespace Trivia.Controllers
             return _context.Question;
         }
 
-        // GET: api/Questions/5
-        [HttpGet("{id}")]
+		[HttpGet]
+		[Route("SubmitScore")]
+		public int SubmitScore(int id)
+		{
+			Highscore scores = new Highscore
+			{
+				Score = id,
+			};
+
+			_context.Highscore.Add(scores);
+			var result = _context.SaveChanges();
+
+			return result;
+		}
+
+		[HttpGet]
+		[Route("Submit")]
+		public int SubmitAnswer(string answer)
+		{
+			return 1;
+		}
+
+		// GET: api/Questions/5
+		[HttpGet("{id}")]
         public async Task<IActionResult> GetQuestion([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -116,16 +139,6 @@ namespace Trivia.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(question);
-        }
-
-        [Route("api/AddQuestion")]
-        public string AddQuestion(string question)
-        {
-            Question q = new Question();
-            _context.Question.AddAsync(q);
-            q.QuestionName = question;
-            _context.SaveChanges();
-            return "Added new question";
         }
 
         private bool QuestionExists(int id)

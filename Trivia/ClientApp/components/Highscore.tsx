@@ -1,29 +1,46 @@
 ﻿import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 
+interface Highscores {
+	score: number;
+	id: number;
+}
+
 interface IHighscoreProps { }
 interface IHighscoreState {
-	score: number;
-	userId: number;
+	scores: Highscores[];
 }
 
 export class Highscore extends React.Component<RouteComponentProps<{}>, IHighscoreState> {
 	constructor() {
 		super();
-		this.state = { score: 0, userId: 1 }
-
+		this.state = { scores: [] }
 		fetch('/api/Highscores')
 			.then(response => { console.log('Highscores returned ', response); return response.json(); })
 			.then(data => {
-				this.setState({ score: data.score, userId: data.userId });
-				console.log('Highscores json ', data)
+				this.setState({ scores: data });
 			})
 	}
 	public render() {
+		const list = this.state.scores.map(scores => (
+			<tr>
+				<td> {scores.score} </td>
+				<td> {scores.id} </td>
+			</tr>
+		));
 		return <div>
-			<p>See highscore here!</p>
-			{this.state.score}
-			{this.state.userId}
-		</div>;
+			<h1>See all highscore here!</h1>
+
+			<table className='table'>
+				<thead>
+					<tr>
+						<th>Score</th>
+						<th>Player</th>
+					</tr>
+				</thead>
+				<tbody> {list} </tbody>
+			</table>
+		</div >;
 	}
 }
+

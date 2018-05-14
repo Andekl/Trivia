@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Trivia.Controllers
 {
-    public class HomeController : Controller
+	[Authorize]
+	public class HomeController : Controller
     {
-        //[Authorize]
         public IActionResult Index() 
         {
             return View();
