@@ -54,9 +54,9 @@ export class Home extends React.Component<RouteComponentProps<{}>, IQuestionsSta
 					<thead>
 						<tr>
 							<th>Question</th>
-							<th>1</th>
-							<th>2</th>
-							<th>3</th>
+							<th>A</th>
+							<th>B</th>
+							<th>C</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -65,17 +65,17 @@ export class Home extends React.Component<RouteComponentProps<{}>, IQuestionsSta
 							<td><input onChange={this.handleAnswer}
 								type="radio"
 								name="answer"
-								checked={this.state.selectedOption === '1'}
+								checked={this.state.selectedOption === 'A'}
 								value="A" />{questions[counter1].correctOption}</td>
 							<td><input onChange={this.handleAnswer}
 								type="radio"
 								name="answer"
-								checked={this.state.selectedOption === '2'}
+								checked={this.state.selectedOption === 'B'}
 								value="B" />{questions[counter1].falseOption1}</td>
 							<td><input onChange={this.handleAnswer}
 								type="radio"
 								name="answer"
-								checked={this.state.selectedOption === '3'}
+								checked={this.state.selectedOption === 'C'}
 								value="C" />{questions[counter1].falseOption2}</td>
 						</tr>
 					</tbody>
@@ -91,7 +91,7 @@ export class Home extends React.Component<RouteComponentProps<{}>, IQuestionsSta
 	}
 
 	public submitAnswer(event: any) {
-		fetch('/api/Submit/' + this.state.selectedOption)
+		fetch('/api/Submit' + this.state.selectedOption)
 			.then(Response => {
 				counter++;
 				console.log(counter);
