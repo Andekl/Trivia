@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using React.Trivia.Models;
+using Trivia.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-namespace React.Trivia.Data
+namespace Trivia.Data
 {
-	public class TriviaContext : IdentityDbContext
+	public class TriviaContext : IdentityDbContext<ApplicationUser>
 	{
 		public TriviaContext(DbContextOptions<TriviaContext> options)
 			: base(options)

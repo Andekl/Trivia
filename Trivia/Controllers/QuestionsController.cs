@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using React.Trivia.Data;
-using React.Trivia.Models;
+using Trivia.Data;
+using Trivia.Models;
 
 namespace Trivia.Controllers
 {
