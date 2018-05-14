@@ -28,6 +28,24 @@ namespace Trivia.Controllers
             return _context.Question;
         }
 
+		public int SubmitScore(int score, string userId)
+		{
+			var user = _context.Users.Where(u => u.Id == userId).Single();
+			if (user == null)
+			{
+				throw new ApplicationException($"Unable to load user with ID '{userId}'.");
+			}
+			Highscore scores = new Highscore
+			{
+				Score = score,
+				UserId = userId
+			};
+			_context.Highscore.Add(scores);
+			var result = _context.SaveChanges();
+
+			return result;
+		}
+
 		[HttpGet]
 		[Route("Submit")]
 		public int SubmitAnswer(string answer)

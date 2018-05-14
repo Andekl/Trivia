@@ -11,9 +11,10 @@ using System;
 namespace Trivia.Migrations
 {
     [DbContext(typeof(TriviaContext))]
-    partial class TriviaContextModelSnapshot : ModelSnapshot
+    [Migration("20180514134759_change")]
+    partial class change
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
