@@ -4,8 +4,8 @@ import { RouteComponentProps } from 'react-router';
 interface Question {
 	questionName: string;
 	correctOption: string;
-	wrongOption1: string;
-	wrongOption2: string;
+	falseOption1: string;
+	falseOption2: string;
 }
 
 interface IHomeProps { }
@@ -29,6 +29,7 @@ export class Home extends React.Component<RouteComponentProps<{}>, IHomeState> {
 	public render() {
 		return <div>
 			<h1>Start a new quiz here!</h1>
+
 		</div>;
 	}
 }
