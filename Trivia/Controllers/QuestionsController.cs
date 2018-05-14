@@ -38,8 +38,9 @@ namespace Trivia.Controllers
 			Highscore scores = new Highscore
 			{
 				Score = score,
-				UserId = userId
+				User = ApplicationUser.user
 			};
+
 			_context.Highscore.Add(scores);
 			var result = _context.SaveChanges();
 
