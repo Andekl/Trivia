@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using React.Trivia.Services;
+using Trivia.Services;
 
-namespace React.Trivia.Services
+namespace Trivia.Services
 {
     public static class EmailSenderExtensions
     {

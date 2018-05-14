@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Trivia.Models;
 using Microsoft.AspNetCore.Identity;
-using React.Trivia.Data;
+using Trivia.Data; 
 
 namespace Trivia
 {
@@ -23,20 +23,19 @@ namespace Trivia
 
 		public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddDbContext<TriviaContext>(options => options.UseSqlServer(Configuration.GetConnectionString("IdConnection")));
+		// This method gets called by the runtime. Use this method to add services to the container.
+		public void ConfigureServices(IServiceCollection services)
+		{
+			services.AddDbContext<TriviaContext>(options => options.UseSqlServer(Configuration.GetConnectionString("IdConnection")));
 
-            services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<TriviaContext>()
-                .AddDefaultTokenProviders();
+			services.AddIdentity<ApplicationUser, IdentityRole>()
+				.AddEntityFrameworkStores<TriviaContext>()
+				.AddDefaultTokenProviders();
 
+			services.AddMvc();
+		}
 
-            services.AddMvc();
-        }
-
-	// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 		{
 			if (env.IsDevelopment())

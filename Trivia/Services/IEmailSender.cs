@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace React.Trivia.Services
+namespace Trivia.Services
 {
-    public interface IEmailSender
-    {
-        Task SendEmailAsync(string email, string subject, string message);
-    }
+	public interface IEmailSender
+	{
+		Task SendEmailAsync(string email, string subject, string message);
+	}
 }
