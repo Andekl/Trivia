@@ -36,6 +36,7 @@ namespace Trivia.Controllers
 			Highscore scores = new Highscore
 			{
 				Score = id,
+				Date = DateTime.Now
 			};
 
 			_context.Highscore.Add(scores);
