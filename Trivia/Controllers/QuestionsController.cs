@@ -11,23 +11,23 @@ using Trivia.Models;
 
 namespace Trivia.Controllers
 {
-    [Produces("application/json")]
-    [Route("api/Questions")]
-    public class QuestionsController : Controller
-    {
-        private readonly TriviaContext _context;
+	[Produces("application/json")]
+	[Route("api/Questions")]
+	public class QuestionsController : Controller
+	{
+		private readonly TriviaContext _context;
 
-        public QuestionsController(TriviaContext context)
-        {
-            _context = context;
-        }
+		public QuestionsController(TriviaContext context)
+		{
+			_context = context;
+		}
 
-        // GET: api/Questions
-        [HttpGet]
-        public IEnumerable<Question> GetQuestion()
-        {
-            return _context.Question;
-        }
+		// GET: api/Questions
+		[HttpGet]
+		public IEnumerable<Question> GetQuestion()
+		{
+			return _context.Question;
+		}
 
 		[HttpGet]
 		[Route("SubmitScore")]
@@ -52,99 +52,132 @@ namespace Trivia.Controllers
 			return 1;
 		}
 
+		[HttpGet]
+		[Route("NewQuestion")]
+		public string NewQuestion(string questionName, string OptionA, string OptionB, string OptionC, string CorrectOption)
+		{
+			List<string> paramList = new List<string>
+			{
+				questionName,
+				OptionA,
+				OptionB,
+				OptionC,
+				CorrectOption
+			};
+
+			if (paramList.Any(s => s == null)) { return "Something set to null"; }
+			else
+			{
+				Question question = new Question
+				{
+                    QuestionName = questionName,
+					Option1 = OptionA,
+					Option2 = OptionB,
+					Option3 = OptionC,
+                    CorrectOption = CorrectOption
+				};
+
+				_context.Question.Add(question);
+				_context.SaveChanges();
+
+				return "Question probably added :)";
+
+			}
+		}
+
 		// GET: api/Questions/5
 		[HttpGet("{id}")]
-        public async Task<IActionResult> GetQuestion([FromRoute] int id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+		public async Task<IActionResult> GetQuestion([FromRoute] int id)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
 
-            var question = await _context.Question.SingleOrDefaultAsync(m => m.Id == id);
+			var question = await _context.Question.SingleOrDefaultAsync(m => m.Id == id);
 
-            if (question == null)
-            {
-                return NotFound();
-            }
+			if (question == null)
+			{
+				return NotFound();
+			}
 
-            return Ok(question);
-        }
+			return Ok(question);
+		}
 
-        // PUT: api/Questions/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutQuestion([FromRoute] int id, [FromBody] Question question)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+		// PUT: api/Questions/5
+		[HttpPut("{id}")]
+		public async Task<IActionResult> PutQuestion([FromRoute] int id, [FromBody] Question question)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
 
-            if (id != question.Id)
-            {
-                return BadRequest();
-            }
+			if (id != question.Id)
+			{
+				return BadRequest();
+			}
 
-            _context.Entry(question).State = EntityState.Modified;
+			_context.Entry(question).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!QuestionExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+			try
+			{
+				await _context.SaveChangesAsync();
+			}
+			catch (DbUpdateConcurrencyException)
+			{
+				if (!QuestionExists(id))
+				{
+					return NotFound();
+				}
+				else
+				{
+					throw;
+				}
+			}
 
-            return NoContent();
-        }
+			return NoContent();
+		}
 
-        // POST: api/Questions
-        [HttpPost]
-        public async Task<IActionResult> PostQuestion([FromBody] Question question)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+		// POST: api/Questions
+		[HttpPost]
+		public async Task<IActionResult> PostQuestion([FromBody] Question question)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
 
-            _context.Question.Add(question);
-            await _context.SaveChangesAsync();
+			_context.Question.Add(question);
+			await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetQuestion", new { id = question.Id }, question);
-        }
+			return CreatedAtAction("GetQuestion", new { id = question.Id }, question);
+		}
 
-        // DELETE: api/Questions/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteQuestion([FromRoute] int id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+		// DELETE: api/Questions/5
+		[HttpDelete("{id}")]
+		public async Task<IActionResult> DeleteQuestion([FromRoute] int id)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
 
-            var question = await _context.Question.SingleOrDefaultAsync(m => m.Id == id);
-            if (question == null)
-            {
-                return NotFound();
-            }
+			var question = await _context.Question.SingleOrDefaultAsync(m => m.Id == id);
+			if (question == null)
+			{
+				return NotFound();
+			}
 
-            _context.Question.Remove(question);
-            await _context.SaveChangesAsync();
+			_context.Question.Remove(question);
+			await _context.SaveChangesAsync();
 
-            return Ok(question);
-        }
+			return Ok(question);
+		}
 
-        private bool QuestionExists(int id)
-        {
-            return _context.Question.Any(e => e.Id == id);
-        }
-    }
+		private bool QuestionExists(int id)
+		{
+			return _context.Question.Any(e => e.Id == id);
+		}
+	}
 }
