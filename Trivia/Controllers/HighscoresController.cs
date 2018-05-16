@@ -25,7 +25,7 @@ namespace Trivia.Controllers
         [HttpGet]
         public IEnumerable<Highscore> GetHighscore()
         {
-            return _context.Highscore;
+            return _context.Highscore.OrderByDescending(s => s.Score).ThenByDescending(d => d.Date);
         }
 
         // GET: api/Highscores/5

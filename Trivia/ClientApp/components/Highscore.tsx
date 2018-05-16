@@ -4,6 +4,7 @@ import { RouteComponentProps } from 'react-router';
 interface Highscores {
 	score: number;
 	id: number;
+	date: Date;
 }
 
 interface IHighscoreProps { }
@@ -26,6 +27,7 @@ export class Highscore extends React.Component<RouteComponentProps<{}>, IHighsco
 			<tr>
 				<td> {scores.score} </td>
 				<td> {scores.id} </td>
+				<td> {scores.date} </td>
 			</tr>
 		));
 		return <div>
@@ -36,6 +38,7 @@ export class Highscore extends React.Component<RouteComponentProps<{}>, IHighsco
 					<tr>
 						<th>Score</th>
 						<th>Player</th>
+						<th>Date</th>
 					</tr>
 				</thead>
 				<tbody> {list} </tbody>
